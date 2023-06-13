@@ -8,7 +8,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - uses: sdkman/sdkman-action@main
-        name: Install SDKMAN and Java
+        name: Use proper Java version
         with:
           candidate: java
           version: 17.0.4-amzn
@@ -16,8 +16,6 @@ jobs:
         run: |
           echo "---- java version"
           java --version
-          echo "---- sdk version"
-          sdk version
           echo "---- aws version"
           aws --version
           echo "---- docker-compose version"
