@@ -7,15 +7,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - uses: sdkman/sdkman-action@main
-        name: Use proper Java version
+      - uses: actions/setup-java@v2
+        name: Setup Java
         with:
-          candidate: java
-          version: 17.0.4-amzn
+          distribution: corretto
+          java-version: 17.0.4
+          cache: gradle
       - name: Print details
         run: |
           echo "---- java version"
           java --version
+          echo "---- gradle version"
+          gradle --version
           echo "---- aws version"
           aws --version
           echo "---- docker-compose version"
