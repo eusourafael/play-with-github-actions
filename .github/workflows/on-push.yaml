@@ -12,7 +12,8 @@ jobs:
         with:
           distribution: corretto
           java-version: 17.0
-          cache: gradle
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
       - name: Print details
         run: |
           echo "---- java version"
@@ -27,3 +28,15 @@ jobs:
           go version
           echo "---- print ls"
           ls
+          echo "---- print ls demo/"
+          ls demo/
+          echo "---- print ls demo2/"
+          ls demo2/
+      - name: Build demo
+        run: ./gradlew build -p demo/
+      - name: Print build details
+        run: |
+          echo "---- print ls demo/"
+          ls demo/
+          echo "---- print ls demo2/"
+          ls demo2/
