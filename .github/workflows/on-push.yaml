@@ -7,6 +7,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - uses: sdkman/sdkman-action@v1
+        name: Install SDKMAN and Java
+        with:
+          candidate: java
+          version: 17.0.4-amzn
       - name: Print details
         run: |
           echo "---- java version"
