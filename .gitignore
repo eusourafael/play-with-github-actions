@@ -1,2 +1,6 @@
 .idea
 *.iml
+
+# Not required gradle files
+.gradle
+/**/.gradle
