@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - uses: sdkman/sdkman-action@v1
+      - uses: sdkman/sdkman-action@v1-preview
         name: Install SDKMAN and Java
         with:
           candidate: java
