@@ -44,4 +44,4 @@ jobs:
           ls demo2/
       - name: Print GITHUB_EVENT_PATH
         run: |
-          echo "$GITHUB_EVENT_PATH"
+          cat $GITHUB_EVENT_PATH
