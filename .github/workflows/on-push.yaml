@@ -42,3 +42,6 @@ jobs:
           ls demo/
           echo "---- print ls demo2/"
           ls demo2/
+      - name: Print GITHUB_EVENT_PATH
+        run: |
+          echo "$GITHUB_EVENT_PATH"
