@@ -9,6 +9,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Print libraries.json
+        run: |
+          cat ./libraries.json
       - name: Read libraries
         id: set-matrix
         run: |
