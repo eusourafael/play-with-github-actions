@@ -3,45 +3,64 @@ on:
   - push
   - workflow_dispatch
 jobs:
-  my-job:
-    name: My job
+  read-libraries:
+    id: read-libraries
+    name: Read Libraries
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: corretto
-          java-version: 17.0
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+      - name: Read libraries
+        id: set-matrix
+        run: |
+          JSON=$(cat ./libraries.json)
+          echo "::set-output name=matrix::${JSON//'%'/'%25'}"
+
+  build-libraries:
+    needs: read-libraries
+    name: Build libraries
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{fromJson(needs.read-libraries.outputs.matrix)}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Print details
         run: |
-          echo "---- java version"
-          java --version
-          echo "---- gradle version"
-          gradle --version
-          echo "---- aws version"
-          aws --version
-          echo "---- docker-compose version"
-          docker-compose version
-          echo "---- go version"
-          go version
-          echo "---- print ls"
-          ls
-          echo "---- print ls demo/"
-          ls demo/
-          echo "---- print ls demo2/"
-          ls demo2/
-      - name: Build demo
-        run: ./gradlew build -p demo/
-      - name: Print build details
-        run: |
-          echo "---- print ls demo/"
-          ls demo/
-          echo "---- print ls demo2/"
-          ls demo2/
-      - name: Print GITHUB_EVENT_PATH
-        run: |
-          cat $GITHUB_EVENT_PATH
+          echo ${{ matrix }}
+#      - name: Setup Java
+#        uses: actions/setup-java@v3
+#        with:
+#          distribution: corretto
+#          java-version: 17.0
+#      - name: Setup Gradle
+#        uses: gradle/gradle-build-action@v2
+#      - name: Print details
+#        run: |
+#          echo "---- java version"
+#          java --version
+#          echo "---- gradle version"
+#          gradle --version
+#          echo "---- aws version"
+#          aws --version
+#          echo "---- docker-compose version"
+#          docker-compose version
+#          echo "---- go version"
+#          go version
+#          echo "---- print ls"
+#          ls
+#          echo "---- print ls demo/"
+#          ls demo/
+#          echo "---- print ls demo2/"
+#          ls demo2/
+#      - name: Build demo
+#        run: ./gradlew build -p demo/
+#      - name: Print build details
+#        run: |
+#          echo "---- print ls demo/"
+#          ls demo/
+#          echo "---- print ls demo2/"
+#          ls demo2/
+#      - name: Print GITHUB_EVENT_PATH
+#        run: |
+#          cat $GITHUB_EVENT_PATH
