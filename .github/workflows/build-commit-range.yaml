@@ -6,12 +6,16 @@ on:
 jobs:
   dump_contexts_to_log:
     runs-on: ubuntu-latest
-    env:
-      RAFAEL_REF: ${{ github.ref }}
     steps:
-      - run: | 
-          echo $RAFAEL_REF
-          echo ${{ github.ref }}
+      - name: Set a multiline environment variable
+        run: |
+          echo "LIBRARIES_JSON<<EOF" >> "$GITHUB_ENV"
+          echo $(cat ${{ github.event.path }}) >> "$GITHUB_ENV"
+          echo "EOF" >> "$GITHUB_ENV"
+      - name: Print multiline environment variable
+        run: |
+          echo "${{ env.LIBRARIES_JSON }}"
+  
 
   bla:
     name: Bla
