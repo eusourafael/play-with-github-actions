@@ -14,7 +14,7 @@ jobs:
           echo "EOF" >> "$GITHUB_ENV"
       - name: Print multiline environment variable
         run: |
-          echo "${{ env.LIBRARIES_JSON }}"
+          echo "${{ fromJSON(env.LIBRARIES_JSON).after }}"
   
 
   bla:
