@@ -19,9 +19,9 @@ jobs:
           echo "${{ env.action_state }}"
       - name: Set a multiline environment variable
         run: |
-          echo "JSON_RESPONSE<<$EOF" >> "$GITHUB_ENV"
+          echo "JSON_RESPONSE<<EOF" >> "$GITHUB_ENV"
           cat ./libraries.json >> "$GITHUB_ENV"
-          echo "$EOF" >> "$GITHUB_ENV"
+          echo "EOF" >> "$GITHUB_ENV"
       - name: Print multiline environment variable
         run: |
           echo "${{ env.JSON_RESPONSE }}"
