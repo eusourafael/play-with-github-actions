@@ -51,7 +51,7 @@ jobs:
         id: my-read-json-step
         run: |
           echo "SELECTED_COLOR<<EOF" >> "$GITHUB_OUTPUT"
-          echo "a" >> "$GITHUB_OUTPUT"
+          echo $(cat ./libraries.json) >> "$GITHUB_OUTPUT"
           echo "b" >> "$GITHUB_OUTPUT"
           echo "c" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
