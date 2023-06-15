@@ -9,7 +9,9 @@ jobs:
     env:
       RAFAEL_REF: ${{ github.ref }}
     steps:
-      - run: echo '$RAFAEL_REF'
+      - run: | 
+          echo $RAFAEL_REF
+          echo ${{ github.ref }}
 
   bla:
     name: Bla
