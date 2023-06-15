@@ -1,6 +1,5 @@
 name: on push
 on:
-  - push
   - workflow_dispatch
 jobs:
   read-libraries:
@@ -19,6 +18,7 @@ jobs:
               echo 'LIBRARIES_JSON<<EOF' >> $GITHUB_ENV
               cat ./libraries.json >> $GITHUB_ENV
               echo 'EOF' >> $GITHUB_ENV
+
   print-matrix:
     needs: read-libraries
     name: Print matrix variable
