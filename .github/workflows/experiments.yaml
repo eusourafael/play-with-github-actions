@@ -20,7 +20,7 @@ jobs:
       - name: Set a multiline environment variable
         run: |
           echo "JSON_RESPONSE<<EOF" >> "$GITHUB_ENV"
-          cat ./libraries.json >> "$GITHUB_ENV"
+          echo $(cat ./libraries.json) >> "$GITHUB_ENV"
           echo "EOF" >> "$GITHUB_ENV"
       - name: Print multiline environment variable
         run: |
