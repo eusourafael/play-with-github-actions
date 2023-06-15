@@ -43,13 +43,13 @@ jobs:
         run: |
           echo "${{ steps.my-read-json-step.outputs.LIBRARIES_JSON }}"
 
-  print-details:
-    needs: experiments
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print multiline environment variable
-        run: |
-          echo "${{ env.LIBRARIES_JSON }}"
+#  print-details:
+#    needs: experiments
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Print multiline environment variable
+#        run: |
+#          echo "${{ env.LIBRARIES_JSON }}"
 
 #  build-libraries:
 #    needs: experiments
