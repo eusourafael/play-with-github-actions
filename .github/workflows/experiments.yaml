@@ -36,12 +36,10 @@ jobs:
       - name: Set a multiline output variable
         id: my-read-json-step
         run: |
-          echo "LIBRARIES_JSON<<EOF" >> "GITHUB_OUTPUT"
-          echo $(cat ./libraries.json) >> "GITHUB_OUTPUT"
-          echo "EOF" >> "GITHUB_OUTPUT"
+          echo "SELECTED_COLOR=green" >> "$GITHUB_OUTPUT"
       - name: Print multiline output variable
         run: |
-          echo "${{ steps.my-read-json-step.outputs.LIBRARIES_JSON }}"
+          echo "${{ steps.my-read-json-step.outputs.SELECTED_COLOR }}"
 
 #  print-details:
 #    needs: experiments
