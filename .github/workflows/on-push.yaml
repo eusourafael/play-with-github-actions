@@ -15,8 +15,10 @@ jobs:
       - name: Read libraries
         id: set-matrix
         run: |
-          JSON=$(cat ./libraries.json)
-          echo "::set-output name=matrix::${JSON//'%'/'%25'}"
+          - run: |
+              echo 'LIBRARIES_JSON<<EOF' >> $GITHUB_ENV
+              cat ./libraries.json >> $GITHUB_ENV
+              echo 'EOF' >> $GITHUB_ENV
   print-matrix:
     needs: read-libraries
     name: Print matrix variable
@@ -24,7 +26,7 @@ jobs:
     steps:
       - name: print details
         run: |
-          echo ${{needs.read-libraries.outputs.matrix}}
+          echo ${{env.LIBRARIES_JSON}}
 #  build-libraries:
 #    needs: read-libraries
 #    name: Build libraries
