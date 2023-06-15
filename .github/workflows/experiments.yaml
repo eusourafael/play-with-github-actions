@@ -26,15 +26,23 @@ jobs:
         run: |
           echo "${{ env.LIBRARIES_JSON }}"
 
-  build-libraries:
+  print-details:
     needs: experiments
-    name: Build libraries
     runs-on: ubuntu-latest
-    strategy:
-      matrix: ${{fromJson(env.LIBRARIES_JSON)}}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Print details
+      - name: Print multiline environment variable
         run: |
-          echo ${{ matrix }}
+          echo "${{ env.LIBRARIES_JSON }}"
+
+#  build-libraries:
+#    needs: experiments
+#    name: Build libraries
+#    runs-on: ubuntu-latest
+#    strategy:
+#      matrix: ${{fromJson(env.LIBRARIES_JSON)}}
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#      - name: Print details
+#        run: |
+#          echo ${{ matrix }}
