@@ -1,0 +1,14 @@
+{
+  "include": [
+    {
+      "name": "my-library-a",
+      "path": "./libraries/my-library-a",
+      "publish": false
+    },
+    {
+      "name": "my-library-b",
+      "path": "./libraries/my-library-b",
+      "publish": true
+    }
+  ]
+}

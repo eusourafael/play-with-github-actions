@@ -4,7 +4,6 @@ on:
   - workflow_dispatch
 jobs:
   read-libraries:
-    id: read-libraries
     name: Read Libraries
     runs-on: ubuntu-latest
     steps:
