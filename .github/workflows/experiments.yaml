@@ -72,6 +72,7 @@ jobs:
     name: Build libraries
     runs-on: ubuntu-latest
     strategy:
+      max-parallel: 1
       matrix: ${{fromJson(needs.set-multiline-output-variable.outputs.matrix)}}
     steps:
       - name: Checkout
