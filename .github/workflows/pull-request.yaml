@@ -16,8 +16,8 @@ jobs:
         id: filter
         with:
           filters: |
-            my-library-a: ./libraries/my-library-a
-            my-library-b: ./libraries/my-library-b
+            my-library-a: libraries/my-library-a/**
+            my-library-b: libraries/my-library-b/**
 
   build:
     needs: changes
