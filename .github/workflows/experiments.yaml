@@ -1,7 +1,6 @@
 name: experiments
 on:
   - workflow_dispatch
-  - push
 jobs:
   set-env-variable-in-job:
     # it did not work because the environment variable is set in the job itself, does not propagate to other jobs
