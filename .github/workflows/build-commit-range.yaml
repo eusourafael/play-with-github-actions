@@ -10,7 +10,7 @@ jobs:
       - name: Set a multiline environment variable
         run: |
           echo "LIBRARIES_JSON<<EOF" >> "$GITHUB_ENV"
-          echo $(cat ${{ github.event.path }}) >> "$GITHUB_ENV"
+          echo $(cat $GITHUB_EVENT_PATH) >> "$GITHUB_ENV"
           echo "EOF" >> "$GITHUB_ENV"
       - name: Print multiline environment variable
         run: |
