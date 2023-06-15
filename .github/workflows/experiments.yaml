@@ -59,7 +59,7 @@ jobs:
         run: |
           echo "${{ steps.my-read-json-step.outputs.LIBRARIES }}"
 
-  print-details:
+  print-multiline-output-variable-details:
     needs: set-multiline-output-variable
     runs-on: ubuntu-latest
     steps:
@@ -67,15 +67,15 @@ jobs:
         run: |
           echo "${{ needs.set-multiline-output-variable.outputs.matrix }}"
 
-#  build-libraries:
-#    needs: experiments
-#    name: Build libraries
-#    runs-on: ubuntu-latest
-#    strategy:
-#      matrix: ${{fromJson(env.LIBRARIES_JSON)}}
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v3
-#      - name: Print details
-#        run: |
-#          echo ${{ matrix }}
+  build-libraries:
+    needs: set-multiline-output-variable
+    name: Build libraries
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{fromJson(needs.set-multiline-output-variable.outputs.matrix)}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Print details
+        run: |
+          echo ${{ matrix }}
