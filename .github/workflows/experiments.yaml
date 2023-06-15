@@ -19,9 +19,22 @@ jobs:
           echo "${{ env.action_state }}"
       - name: Set a multiline environment variable
         run: |
-          echo "JSON_RESPONSE<<EOF" >> "$GITHUB_ENV"
+          echo "LIBRARIES_JSON<<EOF" >> "$GITHUB_ENV"
           echo $(cat ./libraries.json) >> "$GITHUB_ENV"
           echo "EOF" >> "$GITHUB_ENV"
       - name: Print multiline environment variable
         run: |
-          echo "${{ env.JSON_RESPONSE }}"
+          echo "${{ env.LIBRARIES_JSON }}"
+
+  build-libraries:
+    needs: experiments
+    name: Build libraries
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{fromJson(env.LIBRARIES_JSON)}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Print details
+        run: |
+          echo ${{ matrix }}
