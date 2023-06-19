@@ -11,9 +11,9 @@ jobs:
     steps:
       - name: Read Github event details
         run: |
-          echo "EVENT_PATH_JSON<<EOF" >> "$GITHUB_ENV"
-          echo $(cat $GITHUB_EVENT_PATH) >> "$GITHUB_ENV"
-          echo "EOF" >> "$GITHUB_ENV"
+          echo "EVENT_PATH_JSON<<EOF" >> $GITHUB_ENV
+          echo $(cat $GITHUB_EVENT_PATH) >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
       - name: Create commit range variable
         id: create-commit-range
         run: |
