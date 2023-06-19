@@ -29,12 +29,12 @@ jobs:
         run: |
           echo "commit-range=my-commit-range >> $GITHUB_OUTPUT"
       - run: |
-          cat $GITHUB_OUTPUT
+          echo $(cat $GITHUB_OUTPUT)
 
-  use-commit-range:
-    needs: build-commit-range
-    runs-on: ubuntu-latest
-    steps:
-      - name: Using commit range variable
-        run: |
-          echo "${{ needs.build-commit-range.outputs.commit-range }}"
+#  use-commit-range:
+#    needs: build-commit-range
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Using commit range variable
+#        run: |
+#          echo "${{ needs.build-commit-range.outputs.commit-range }}"
