@@ -27,8 +27,10 @@ jobs:
       - name: Create commit range variable
         id: create-commit-range
         run: |
+          cat $GITHUB_OUTPUT
           echo "commit-range=my-commit-range >> $GITHUB_OUTPUT"
       - run: |
+          cat $GITHUB_OUTPUT
           cat $GITHUB_EVENT_PATH
 
 #  use-commit-range:
