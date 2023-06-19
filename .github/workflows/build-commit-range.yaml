@@ -4,31 +4,23 @@ on:
   - push
 
 jobs:
-  dump_contexts_to_log:
+  build_commit_range:
     runs-on: ubuntu-latest
+    outputs:
+      commit_range: ${{steps.create_commit_range.outputs.commit_range}}
     steps:
-      - name: Set a multiline environment variable
+      - name: Read Github event details
         run: |
           echo "EVENT_PATH_JSON<<EOF" >> "$GITHUB_ENV"
           echo $(cat $GITHUB_EVENT_PATH) >> "$GITHUB_ENV"
           echo "EOF" >> "$GITHUB_ENV"
-      - name: Print multiline environment variable
+      - name: Create commit range variable
+        id: create_commit_range
         run: |
-          echo "${{ fromJSON(env.EVENT_PATH_JSON).after }}...${{ fromJSON(env.EVENT_PATH_JSON).before }}"
-  
-
-  bla:
-    name: Bla
+          echo "commit_range=${{ fromJSON(env.EVENT_PATH_JSON).after }}...${{ fromJSON(env.EVENT_PATH_JSON).before }} >> $GITHUB_OUTPUT"
+  use_commit_range:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Print GITHUB_EVENT_PATH
+      - name: Using commit range variable
         run: |
-          echo "$GITHUB_EVENT_PATH"
-      - run: |
-          echo $GITHUB_EVENT_PATH
-      - run: |
-          echo "${{ env.GITHUB_EVENT_PATH }}"
-      - run: |
-          echo "${{ fromJSON(env.GITHUB_EVENT_PATH) }}"
+          echo "${{ jobs.build_commit_range.outputs.commit_range }}"
