@@ -28,6 +28,8 @@ jobs:
         id: create-commit-range
         run: |
           echo "commit-range=my-commit-range >> $GITHUB_OUTPUT"
+      - run: |
+          cat $GITHUB_OUTPUT
 
   use-commit-range:
     needs: build-commit-range
