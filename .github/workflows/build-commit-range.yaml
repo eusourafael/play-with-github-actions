@@ -30,6 +30,7 @@ jobs:
           echo $GITHUB_OUTPUT
           cat $GITHUB_OUTPUT
           echo "commit-range=my-commit-range >> $GITHUB_OUTPUT"
+          echo $GITHUB_OUTPUT
           cat $GITHUB_OUTPUT
       - run: |
           echo $GITHUB_OUTPUT
