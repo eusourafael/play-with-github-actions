@@ -29,7 +29,7 @@ jobs:
         run: |
           echo "commit-range=my-commit-range >> $GITHUB_OUTPUT"
       - run: |
-          echo $(cat $GITHUB_OUTPUT)
+          cat $GITHUB_EVENT_PATH
 
 #  use-commit-range:
 #    needs: build-commit-range
