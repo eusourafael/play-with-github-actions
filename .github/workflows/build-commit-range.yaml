@@ -9,12 +9,12 @@ jobs:
     steps:
       - name: Set a multiline environment variable
         run: |
-          echo "LIBRARIES_JSON<<EOF" >> "$GITHUB_ENV"
+          echo "EVENT_PATH_JSON<<EOF" >> "$GITHUB_ENV"
           echo $(cat $GITHUB_EVENT_PATH) >> "$GITHUB_ENV"
           echo "EOF" >> "$GITHUB_ENV"
       - name: Print multiline environment variable
         run: |
-          echo "${{ fromJSON(env.LIBRARIES_JSON).after }}"
+          echo "${{ fromJSON(env.EVENT_PATH_JSON).after }}...${{ fromJSON(env.EVENT_PATH_JSON).before }}"
   
 
   bla:
