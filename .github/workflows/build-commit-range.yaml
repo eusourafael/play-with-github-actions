@@ -4,25 +4,35 @@ on:
   - push
 
 jobs:
-  build_commit_range:
+#  build-commit-range:
+#    runs-on: ubuntu-latest
+#    outputs:
+#      commit_range: ${{steps.create-commit-range.outputs.commit_range}}
+#    steps:
+#      - name: Read Github event details
+#        run: |
+#          echo "EVENT_PATH_JSON<<EOF" >> "$GITHUB_ENV"
+#          echo $(cat $GITHUB_EVENT_PATH) >> "$GITHUB_ENV"
+#          echo "EOF" >> "$GITHUB_ENV"
+#      - name: Create commit range variable
+#        id: create-commit-range
+#        run: |
+#          echo "commit_range=${{ fromJSON(env.EVENT_PATH_JSON).after }}...${{ fromJSON(env.EVENT_PATH_JSON).before }} >> $GITHUB_OUTPUT"
+
+  build-commit-range:
     runs-on: ubuntu-latest
     outputs:
-      commit_range: ${{steps.create_commit_range.outputs.commit_range}}
+      commit-range: ${{steps.create-commit-range.outputs.commit-range}}
     steps:
-      - name: Read Github event details
-        run: |
-          echo "EVENT_PATH_JSON<<EOF" >> "$GITHUB_ENV"
-          echo $(cat $GITHUB_EVENT_PATH) >> "$GITHUB_ENV"
-          echo "EOF" >> "$GITHUB_ENV"
       - name: Create commit range variable
-        id: create_commit_range
+        id: create-commit-range
         run: |
-          echo "commit_range=${{ fromJSON(env.EVENT_PATH_JSON).after }}...${{ fromJSON(env.EVENT_PATH_JSON).before }} >> $GITHUB_OUTPUT"
+          echo "commit-range=my-commit-range >> $GITHUB_OUTPUT"
 
-  use_commit_range:
-    needs: build_commit_range
+  use-commit-range:
+    needs: build-commit-range
     runs-on: ubuntu-latest
     steps:
       - name: Using commit range variable
         run: |
-          echo "${{ needs.build_commit_range.outputs.commit_range }}"
+          echo "${{ needs.build-commit-range.outputs.commit-range }}"
