@@ -18,9 +18,11 @@ jobs:
         id: create_commit_range
         run: |
           echo "commit_range=${{ fromJSON(env.EVENT_PATH_JSON).after }}...${{ fromJSON(env.EVENT_PATH_JSON).before }} >> $GITHUB_OUTPUT"
+
   use_commit_range:
+    needs: build_commit_range
     runs-on: ubuntu-latest
     steps:
       - name: Using commit range variable
         run: |
-          echo "${{ jobs.build_commit_range.outputs.commit_range }}"
+          echo "${{ needs.build_commit_range.outputs.commit_range }}"
