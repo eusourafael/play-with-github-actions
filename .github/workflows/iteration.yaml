@@ -1,0 +1,32 @@
+name: iteration
+on:
+  - push
+jobs:
+  read-config:
+    name: Read configuration
+    runs-on: ubuntu-latest
+    outputs:
+      libraries: ${{ steps.read-json-step.outputs.LIBRARIES }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Read JSON file
+        id: read-json-step
+        run: |
+          echo "LIBRARIES<<EOF" >> "$GITHUB_OUTPUT"
+          echo $(cat ./libraries.json) >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: read-config
+    name: Build
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+      matrix: ${{fromJson(needs.read-config.outputs.libraries)}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Print details
+        run: |
+          echo ${{ matrix }}

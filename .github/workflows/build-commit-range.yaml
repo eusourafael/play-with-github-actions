@@ -1,7 +1,7 @@
 name: bla
 
 on:
-  - push
+  - workflow_dispatch
 
 jobs:
   build-commit-range:
