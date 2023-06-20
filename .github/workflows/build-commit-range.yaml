@@ -17,7 +17,7 @@ jobs:
       - name: Create commit range variable
         id: create-commit-range
         run: |
-          echo "commit-range=${{ fromJSON(env.EVENT_PATH_JSON).after }}...${{ fromJSON(env.EVENT_PATH_JSON).before }}" >> $GITHUB_OUTPUT
+          echo "commit-range=${{ fromJSON(env.EVENT_PATH_JSON).before }}...${{ fromJSON(env.EVENT_PATH_JSON).after }}" >> $GITHUB_OUTPUT
 
 #  build-commit-range:
 #    runs-on: ubuntu-latest

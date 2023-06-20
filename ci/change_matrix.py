@@ -18,4 +18,10 @@ with open(json_file_path, "r") as read_file:
         if not "changed" in data:
             data["changed"] = False
 
-    print(json.dumps(data_list))
+    filtered_data_list = [x for x in data_list if x["changed"]==True]
+
+    if filtered_data_list:
+        matrix = {"include": filtered_data_list}
+        print(json.dumps(matrix))
+    else:
+        print("")
