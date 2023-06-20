@@ -21,8 +21,7 @@ with open(json_file_path, "r") as read_file:
     filtered_data_list = [x for x in data_list if x["changed"]==True]
 
     if filtered_data_list:
-        matrix={}
-        matrix["include"]=json.dumps(filtered_data_list)
-        print(matrix)
+        matrix = {"include": filtered_data_list}
+        print(json.dumps(matrix))
     else:
         print("")
