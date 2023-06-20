@@ -18,4 +18,6 @@ with open(json_file_path, "r") as read_file:
         if not "changed" in data:
             data["changed"] = False
 
-    print(json.dumps(data_list))
+    filtered_data_list = [x for x in data_list if x["changed"]==True]
+
+    print(json.dumps(filtered_data_list))
