@@ -1,6 +1,6 @@
 name: iteration
 on:
-  - push
+  - pull_request
 jobs:
   read-config:
     name: Read configuration
@@ -27,6 +27,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - uses: tj-actions/changed-files@v36
         id: changed-files
         with:
