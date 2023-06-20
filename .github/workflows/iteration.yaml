@@ -19,7 +19,7 @@ jobs:
 
   build:
     needs: read-config
-    name: Build
+    name: Build library ${{ matrix.name }}
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 1
@@ -27,6 +27,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Print details
+      - uses: tj-actions/changed-files@v36
+        id: changed-files
+        with:
+          files: ${{ matrix.path }}
+      - name: Change happened
+        if: steps.changed-files.outputs.any_changed == 'true'
         run: |
-          echo ${{ toJSON(matrix) }}
+          echo "One or more files in the ${{ matrix.path }} folder has changed."
