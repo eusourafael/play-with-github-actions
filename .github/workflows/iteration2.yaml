@@ -16,7 +16,7 @@ jobs:
         run: |
           echo "matrix=$(python3 ci/change_matrix.py libraries-python.json ${{ steps.changed-files.outputs.all_changed_files }})" >> $GITHUB_OUTPUT
       - run: |
-          cat ${{ steps.prepare-change-matrix.outputs.matrix }}
+          echo ${{ steps.prepare-change-matrix.outputs.matrix }}
 
 #  build:
 #    if: ${{needs.read-config.outputs.matrix != ''}}
