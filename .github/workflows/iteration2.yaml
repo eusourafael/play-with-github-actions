@@ -14,9 +14,10 @@ jobs:
         id: changed-files
       - id: prepare-change-matrix
         run: |
-          echo "matrix={\"include\":$(python3 ci/change_matrix.py libraries-python.json ${{ steps.changed-files.outputs.all_changed_files }})}" >> $GITHUB_OUTPUT
+          echo "matrix=$(python3 ci/change_matrix.py libraries-python.json ${{ steps.changed-files.outputs.all_changed_files }})" >> $GITHUB_OUTPUT
 
   build:
+    if: needs.read-config.outputs.matrix != ""
     needs: read-config
     name: Build library ${{ matrix.name }}
     runs-on: ubuntu-latest
