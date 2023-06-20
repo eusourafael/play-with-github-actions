@@ -1,0 +1,38 @@
+name: iteration
+on:
+  - pull_request
+jobs:
+  read-config:
+    name: Read configuration
+    runs-on: ubuntu-latest
+    outputs:
+      libraries: ${{ steps.read-json-step.outputs.LIBRARIES }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: tj-actions/changed-files@v36
+        id: changed-files
+      - id: prepare-change-matrix
+        run: |
+          python3 ci/change_matrix.py libraries-python.json ${{ steps.changed-files.outputs.all_changed_files }}
+
+#  build:
+#    needs: read-config
+#    name: Build library ${{ matrix.name }}
+#    runs-on: ubuntu-latest
+#    strategy:
+#      max-parallel: 1
+#      matrix: ${{fromJson(needs.read-config.outputs.libraries)}}
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#        with:
+#          fetch-depth: 0
+#      - uses: tj-actions/changed-files@v36
+#        id: changed-files
+#        with:
+#          files: ${{ matrix.path }}
+#      - name: Change happened
+#        if: steps.changed-files.outputs.any_changed == 'true'
+#        run: |
+#          echo "One or more files in the ${{ matrix.path }} folder has changed."

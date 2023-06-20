@@ -1,6 +1,6 @@
 name: iteration
 on:
-  - pull_request
+  - workflow_dispatch
 jobs:
   read-config:
     name: Read configuration
