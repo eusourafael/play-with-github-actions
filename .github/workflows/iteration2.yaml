@@ -22,25 +22,27 @@ jobs:
           files_yaml: |
             demo: demo/**
             demo2: demo2/**
-      - id: prepare-change-status
-        run: |
-          echo "change-status=${{ steps.changed-specific-files.outputs }}" >> $GITHUB_OUTPUT
+      - run: |
+          echo "${{toJSON(steps.changed-specific-files.outputs)}}"
+#      - id: prepare-change-status
+#        run: |
+#          echo "change-status=${{ steps.changed-specific-files.outputs }}" >> $GITHUB_OUTPUT
 
-  echo:
-    needs: read-config
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print changes status
-        run: |
-          echo "${{toJSON(needs.read-config.outputs.changes-status)}}"
-      - name: Print demo changes
-        if: needs.read-config.outputs.changes-status.demo_any_changed == 'true'
-        run: |
-          echo "changes in demo folder happened"
-      - name: Print demo2 changes
-        if: needs.read-config.outputs.changes-status.demo2_any_changed == 'true'
-        run: |
-          echo "changes in demo2 folder happened"
+#  echo:
+#    needs: read-config
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Print changes status
+#        run: |
+#          echo "${{toJSON(needs.read-config.outputs.changes-status)}}"
+#      - name: Print demo changes
+#        if: needs.read-config.outputs.changes-status.demo_any_changed == 'true'
+#        run: |
+#          echo "changes in demo folder happened"
+#      - name: Print demo2 changes
+#        if: needs.read-config.outputs.changes-status.demo2_any_changed == 'true'
+#        run: |
+#          echo "changes in demo2 folder happened"
 
   build:
     if: ${{ needs.read-config.outputs.matrix != '' }}
