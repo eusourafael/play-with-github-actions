@@ -26,7 +26,7 @@ jobs:
           echo "${{toJSON(steps.changed-specific-files.outputs)}}"
       - id: prepare-change-status
         run: |
-          echo "change-status=${{ steps.changed-specific-files.outputs }}" >> $GITHUB_OUTPUT
+          echo "change-status=${{ fromJSON(steps.changed-specific-files.outputs) }}" >> $GITHUB_OUTPUT
 
   echo:
     needs: read-config
