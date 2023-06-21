@@ -19,6 +19,7 @@ jobs:
       - uses: tj-actions/changed-files@v36
         id: changed-specific-files
         with:
+          json: true
           files_yaml: |
             demo: demo/**
             demo2: demo2/**
