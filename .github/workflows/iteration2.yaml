@@ -7,23 +7,37 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.prepare-change-matrix.outputs.matrix }}
+      changes-status: ${{ steps.prepare-change-status.outputs.change-status }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - uses: tj-actions/changed-files@v36
         id: changed-files
+      - id: prepare-change-matrix
+        run: |
+          echo "matrix=$(python3 ci/change_matrix.py libraries-python.json ${{ steps.changed-files.outputs.all_changed_files }})" >> $GITHUB_OUTPUT
       - uses: tj-actions/changed-files@v36
         id: changed-specific-files
         with:
           files_yaml: |
             demo: demo/**
             demo2: demo2/**
-      - if: steps.changed-specific-files.outputs.demo_any_changed=='true'
+      - id: prepare-change-status
         run: |
-          echo "Directory demo has been changed"
-      - id: prepare-change-matrix
+          echo "change-status=${{ steps.changed-specific-files.outputs }}" >> $GITHUB_OUTPUT
+
+  echo:
+    needs: read-config
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print demo changes
+        if: needs.read-config.outputs.changes-status.demo_any_changed == 'true'
         run: |
-          echo "matrix=$(python3 ci/change_matrix.py libraries-python.json ${{ steps.changed-files.outputs.all_changed_files }})" >> $GITHUB_OUTPUT
+          echo "changes in demo folder happened"
+      - name: Print demo2 changes
+        if: needs.read-config.outputs.changes-status.demo2_any_changed == 'true'
+        run: |
+          echo "changes in demo2 folder happened"
 
   build:
     if: ${{ needs.read-config.outputs.matrix != '' }}
