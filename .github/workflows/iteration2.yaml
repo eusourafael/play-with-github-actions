@@ -18,7 +18,7 @@ jobs:
           files_yaml: |
             demo: demo/**
             demo2: demo2/**
-      - if: steps.changed-specific-files.outputs.demo_any_changed=='true
+      - if: steps.changed-specific-files.outputs.demo_any_changed=='true'
         run: |
           echo "Directory demo has been changed"
       - id: prepare-change-matrix
