@@ -1,6 +1,10 @@
-name: iteration
+name: Deploy workflow
+
 on:
-  - pull_request
+  push:
+    branches:
+      - master
+
 jobs:
   read-config:
     name: Read configuration
@@ -25,6 +29,6 @@ jobs:
       max-parallel: 1
       matrix: ${{fromJson(needs.read-config.outputs.matrix)}}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
+      - name: Print library name
+        run: |
+          echo ${{ matrix.name }}
