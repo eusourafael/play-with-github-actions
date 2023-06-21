@@ -40,17 +40,17 @@ jobs:
         if: needs.read-config.outputs.demo2-folder-changed == 'true'
         run: |
           echo "changes in demo2 folder happened"
-#
-#  build:
-#    if: ${{ needs.read-config.outputs.matrix != '' }}
-#    needs: read-config
-#    name: Build library ${{ matrix.name }}
-#    runs-on: ubuntu-latest
-#    strategy:
-#      max-parallel: 1
-#      matrix: ${{fromJson(needs.read-config.outputs.matrix)}}
-#    steps:
-#      - name: Print library name
-#        run: |
-#          echo ${{ matrix.name }}
+
+  build:
+    if: ${{ needs.read-config.outputs.matrix != '' }}
+    needs: read-config
+    name: Build library ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+      matrix: ${{fromJson(needs.read-config.outputs.matrix)}}
+    steps:
+      - name: Print library name
+        run: |
+          echo ${{ matrix.name }}
 
