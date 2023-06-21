@@ -22,11 +22,11 @@ jobs:
           files_yaml: |
             demo: demo/**
             demo2: demo2/**
-      - run: |
-          echo "${{toJSON(steps.changed-specific-files.outputs)}}"
-#      - id: prepare-change-status
-#        run: |
-#          echo "change-status=${{ steps.changed-specific-files.outputs }}" >> $GITHUB_OUTPUT
+#      - run: |
+#          echo "${{toJSON(steps.changed-specific-files.outputs)}}"
+      - id: prepare-change-status
+        run: |
+          echo "change-status=${{ toJSON(steps.changed-specific-files.outputs) }}" >> $GITHUB_OUTPUT
 
 #  echo:
 #    needs: read-config
