@@ -53,4 +53,10 @@ jobs:
       - name: Print library name
         run: |
           echo ${{ matrix.name }}
+  post-build:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "run post build
 
