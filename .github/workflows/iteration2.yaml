@@ -55,7 +55,7 @@ jobs:
           echo ${{ matrix.name }}
   post-build:
     needs: build
-    if: ${{ always() }}
+    if: ${{ needs.read-config.outputs.demo-folder-changed == 'true' && always() }}
     runs-on: ubuntu-latest
     steps:
       - run: |
