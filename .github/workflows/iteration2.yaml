@@ -32,7 +32,7 @@ jobs:
     steps:
       - name: Print changes status
         run: |
-          echo "${{needs.read-config.outputs.changes-status}}"
+          echo "${{toJSON(needs.read-config.outputs.changes-status)}}"
       - name: Print demo changes
         if: needs.read-config.outputs.changes-status.demo_any_changed == 'true'
         run: |
