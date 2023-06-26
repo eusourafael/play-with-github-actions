@@ -1,6 +1,10 @@
 name: Gradle build
 
-on: pull_request
+on:
+  pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
   gradle-build:
