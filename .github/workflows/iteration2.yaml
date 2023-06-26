@@ -1,6 +1,6 @@
 name: iteration
 on:
-  - pull_request
+  - workflow_dispatch
 
 env:
   FOO: bar
