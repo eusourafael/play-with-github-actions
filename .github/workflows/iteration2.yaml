@@ -1,6 +1,10 @@
 name: iteration
 on:
   - pull_request
+
+env:
+  FOO: bar
+
 jobs:
   read-config:
     name: Read configuration
@@ -32,6 +36,9 @@ jobs:
     needs: read-config
     runs-on: ubuntu-latest
     steps:
+      - name: Print environment variables
+        run: |
+          echo "The value of FOO is ${{ env.FOO }}"
       - name: Print demo changes
         if: needs.read-config.outputs.demo-folder-changed == 'true'
         run: |
@@ -53,4 +60,11 @@ jobs:
       - name: Print library name
         run: |
           echo ${{ matrix.name }}
+  post-build:
+    needs: build
+    if: ${{ needs.read-config.outputs.demo-folder-changed == 'true' && always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "run post build"
 
