@@ -13,7 +13,7 @@ jobs:
   child-job:
     needs:
       - parent-job
-    if: ${{ always() }}
+    if: ${{ always() && needs.parent-job.result == 'skipped'}}
     runs-on: ubuntu-latest
     steps:
       - name: echo
