@@ -5,12 +5,13 @@ on: pull_request
 jobs:
   parent-job:
     runs-on: ubuntu-latest
+    if: false
     steps:
       - name: echo
         run: echo "parent-job is running"
 
   child-job:
-    needs: 
+    needs:
       - parent-job
     runs-on: ubuntu-latest
     steps:
