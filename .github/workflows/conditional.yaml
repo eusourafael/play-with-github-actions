@@ -10,8 +10,12 @@ jobs:
         run: echo "parent-job is running"
 
   child-job:
+    needs: 
+      - parent-job
     runs-on: ubuntu-latest
-    if: ${{ jobs.parent-job.result == 'success'}}
     steps:
       - name: echo
         run: echo "child-job is running"
+      - name: status of parent-job
+        run: |
+          echo "${{ toJSON(needs) }}"
