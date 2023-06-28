@@ -1,0 +1,13 @@
+name: java infor
+
+on: pull_request
+
+jobs:
+  print:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print info
+        run: |
+          echo $JAVA_HOME
+          java --version
+          echo ls $JAVA_HOME
