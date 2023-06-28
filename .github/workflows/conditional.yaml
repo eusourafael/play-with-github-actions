@@ -1,0 +1,23 @@
+name: conditional workflow
+
+on: pull_request
+
+jobs:
+  parent-job:
+    runs-on: ubuntu-latest
+    if: false
+    steps:
+      - name: echo
+        run: echo "parent-job is running"
+
+  child-job:
+    needs:
+      - parent-job
+    if: ${{ always() && needs.parent-job.result == 'skipped'}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo
+        run: echo "child-job is running"
+      - name: status of parent-job
+        run: |
+          echo "${{ toJSON(needs) }}"
