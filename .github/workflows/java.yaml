@@ -10,4 +10,4 @@ jobs:
         run: |
           echo $JAVA_HOME
           java --version
-          ls $JAVA_HOME
+          ls $JAVA_HOME/conf/security
