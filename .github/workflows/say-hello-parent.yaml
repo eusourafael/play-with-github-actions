@@ -8,6 +8,6 @@ env:
 jobs:
   say-hello:
     name: Say hello to ${{env.name}}
-    uses: ./.github/workflows/say-hello-children.yaml
+    uses: ./.github/workflows/say-hello-child.yaml
     with:
       name: ${{env.name}}
