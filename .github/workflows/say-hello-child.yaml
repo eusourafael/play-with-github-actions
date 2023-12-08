@@ -1,0 +1,15 @@
+name: say hello - child
+
+on: 
+  workflow_call:
+    inputs:
+      name:
+        required: true
+        type: string
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: say hello
+        run: echo "Hello ${{ inputs.name }}."

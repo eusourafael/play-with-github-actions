@@ -1,0 +1,13 @@
+name: say hello - parent
+
+on: pull_request
+
+env:
+  name: Rafael
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: say hello
+        run: echo "Hello ${{ env.name }}."
