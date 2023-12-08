@@ -7,7 +7,7 @@ env:
 
 jobs:
   say-hello:
-    name: Say hello to ${{ env.name }}
-    uses: ./.github/workflows/say-hello-child.yaml
-    with:
-      name: ${{ env.name }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: say hello
+        run: echo "Hello ${{ inputs.name }}."
