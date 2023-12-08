@@ -1,0 +1,13 @@
+name: say hello - parent
+
+on: pull_request
+
+env:
+  name: Rafael
+
+jobs:
+  say-hello:
+    name: Say hello to ${{env.name}}
+    uses: ./.github/workflows/say-hello-children.yaml
+    with:
+      name: ${{env.name}}
