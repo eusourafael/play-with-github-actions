@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: say hello
-        run: echo "Hello ${{ inputs.name }}."
+        run: echo "Hello ${{ env.name }}."
