@@ -7,7 +7,7 @@ env:
 
 jobs:
   say-hello:
-    name: Say hello to ${{env.name}}
+    name: Say hello to ${{ env.name }}
     uses: ./.github/workflows/say-hello-child.yaml
     with:
-      name: ${{env.name}}
+      name: ${{ env.name }}
