@@ -9,7 +9,8 @@ jobs:
 
   say-hello:
     strategy:
-      name: ["Rafael", "John", "Jane"]
+      matrix:
+        name: ["Rafael", "John", "Jane"]
     uses: ./.github/workflows/say-hello-child.yaml
     with:
       name: ${{ matrix.name }}
