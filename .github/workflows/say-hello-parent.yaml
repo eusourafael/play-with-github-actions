@@ -13,11 +13,17 @@ jobs:
     steps:
       - run: echo "Add env vars to env-vars outputs"
 
-  say-hello:
+  debug:
     needs: env-vars
-    strategy:
-      matrix:
-        name: ${{ fromJson(needs.env-vars.names) }}
-    uses: ./.github/workflows/say-hello-child.yaml
-    with:
-      name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ fromJson(needs.env-vars.names) }}
+
+#  say-hello:
+#    needs: env-vars
+#    strategy:
+#      matrix:
+#        name: ${{ fromJson(needs.env-vars.names) }}
+#    uses: ./.github/workflows/say-hello-child.yaml
+#    with:
+#      name: ${{ matrix.name }}
