@@ -10,6 +10,6 @@ jobs:
     strategy:
       matrix:
         name: ${{ fromJson(env.names) }}
-    uses: ./.github/workflows/deploy-environment.yml
+    uses: ./.github/workflows/say-hello-child.yml
     with:
       name: ${{ matrix.name }}
