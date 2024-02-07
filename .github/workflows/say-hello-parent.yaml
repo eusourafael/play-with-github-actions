@@ -6,10 +6,20 @@ env:
   names: "[ 'Rafael', 'John', 'Jane' ]"
 
 jobs:
+
   say-hello:
     strategy:
       matrix:
-        name: ${{ fromJson(env.names) }}
-    uses: ./.github/workflows/deploy-environment.yml
+        name: ["Rafael", "John", "Jane"]
+    uses: ./.github/workflows/say-hello-child.yaml
     with:
       name: ${{ matrix.name }}
+
+#  say-hello:
+#    needs: env-vars
+#    strategy:
+#      matrix:
+#        name: ${{ fromJson(needs.env-vars.names) }}
+#    uses: ./.github/workflows/say-hello-child.yaml
+#    with:
+#      name: ${{ matrix.name }}
