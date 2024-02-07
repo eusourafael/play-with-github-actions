@@ -6,10 +6,18 @@ env:
   names: "[ 'Rafael', 'John', 'Jane' ]"
 
 jobs:
+  env-vars:
+    runs-on: ubuntu-latest
+    outputs:
+      names: ${{ env.names }}
+    steps:
+      - run: echo "Add env vars to env-vars outputs"
+
   say-hello:
+    needs: env-vars
     strategy:
       matrix:
-        name: ${{ fromJson(env.names) }}
+        name: ${{ fromJson(needs.env-vars.names) }}
     uses: ./.github/workflows/say-hello-child.yaml
     with:
       name: ${{ matrix.name }}
