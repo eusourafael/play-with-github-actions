@@ -17,6 +17,7 @@ jobs:
     needs: env-vars
     runs-on: ubuntu-latest
     steps:
+      - run: echo ${{ env.names }}
       - run: echo ${{ needs.env-vars.names }}
 
 #  say-hello:
