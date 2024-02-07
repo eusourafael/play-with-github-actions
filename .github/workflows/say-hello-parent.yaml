@@ -3,11 +3,13 @@ name: say hello - parent
 on: pull_request
 
 env:
-  name: Rafael
+  names: "[ 'Rafael', 'John', 'Jane' ]"
 
 jobs:
   say-hello:
-    runs-on: ubuntu-latest
-    steps:
-      - name: say hello
-        run: echo "Hello ${{ env.name }}."
+    strategy:
+      matrix:
+        name: ${{ fromJson(env.names) }}
+    uses: ./.github/workflows/deploy-environment.yml
+    with:
+      name: ${{ matrix.name }}
