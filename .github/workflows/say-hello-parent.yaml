@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{ fromJson(env.names) }}
-      - run: echo ${{ fromJson(env.names).size }}
+      - run: echo ${{ fromJson(env.names).length }}
 #      - run: echo ${{ needs.env-vars.names }}
 
 #  say-hello:
