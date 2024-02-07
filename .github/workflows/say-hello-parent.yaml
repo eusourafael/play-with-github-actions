@@ -1,0 +1,15 @@
+name: say hello - parent
+
+on: pull_request
+
+env:
+  names: "[ 'Rafael', 'John', 'Jane' ]"
+
+jobs:
+  say-hello:
+    strategy:
+      matrix:
+        name: ${{ fromJson(env.names) }}
+    uses: ./.github/workflows/deploy-environment.yml
+    with:
+      name: ${{ matrix.name }}
